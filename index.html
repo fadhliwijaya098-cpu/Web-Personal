@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Fadhli Wijaya | Porto</title>
+  <title>Profil Fadhli Web</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,7 +150,7 @@
       color: var(--ember);
       text-shadow: 0 0 12px var(--ember-soft);
       display: block;
-      padding-left: 20px;
+      padding-left: 26px;
     }
     .cursor {
       display: inline-block;
@@ -169,7 +169,7 @@
       font-weight: 700;
       font-size: clamp(28px, 5vw, 44px);
       letter-spacing: -0.01em;
-      margin: 30px 0 6px;
+      margin: 15px 0 6px;
       color: var(--text);
       text-shadow: 0 0 30px rgba(255,77,61,0.15);
     }
@@ -304,12 +304,18 @@
       color: var(--text-dim);
       text-transform: lowercase;
     }
+    .project-status.completed {
+      color: #4ade80;
+      border-color: rgba(74, 222, 128, 0.4);
+      background: rgba(74, 222, 128, 0.08);
+}
     .project-status.progress { color: var(--ember); border-color: var(--ember-soft); }
     .project-desc {
       font-size: 13.5px;
       color: var(--text-muted);
       line-height: 1.6;
-      margin-bottom: 12px;
+      margin-bottom: 13px;
+      text-align: justify;
     }
     .project-stack { display: flex; gap: 8px; flex-wrap: wrap; }
     .stack-chip {
@@ -443,8 +449,8 @@
     .edu-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
     .edu-meta { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--text-dim); }
 
-    .contact-term { max-width: 560px; }
-    .contact-links { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+    .contact-term { max-width: 660px; }
+    .contact-links { display: flex; justify-content: center; gap: 26px; margin-top: 0px; margin-bottom: 26px; flex-wrap: wrap; }
     .contact-link {
       display: flex; align-items: center; gap: 8px;
       font-family: 'JetBrains Mono', monospace;
@@ -452,12 +458,15 @@
       color: var(--text-muted);
       border: 1px solid var(--border);
       padding: 9px 16px;
-      border-radius: 6px;
+      border-radius: 10px;
       text-decoration: none;
       transition: all 0.15s;
     }
     .contact-link:hover { color: var(--ember); border-color: var(--ember); box-shadow: 0 0 16px var(--ember-soft); }
-
+      .social-icons { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+      .social-icon { display: flex; align-items: center; gap: 12px; color: var(--text-muted); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 17px; padding: 8px 0; transition: color 0.15s; }
+      .social-icon:hover { color: var(--ember); }
+      .social-icon img { width: 30px; height: 30px; object-fit: contain; border-radius: 4px; flex-shrink: 0; }
     .footer {
       text-align: center;
       padding: 30px 24px 50px;
@@ -473,7 +482,6 @@
   <nav class="nav">
     <div class="nav-inner">
       <div class="nav-brand">
-        <i data-lucide="terminal" style="width: 15px; height: 15px;"></i>
         <span>WELCOME TO MY WEBSITE</span>
       </div>
       <div class="nav-links">
@@ -611,17 +619,11 @@
       <div class="project-info">
         <div class="project-head">
           <span class="project-name mono">Banpem Tracking Website</span>
-          <span class="project-status">completed</span>
+          <span class="project-status completed">completed</span>
         </div>
         <p class="project-desc">
           Platform berbasis web yang dirancang untuk membantu Balai Besar Penerapan Modernisasi Pertanian (BRMP) Jawa Barat, Kementerian Pertanian RI, dalam melakukan tracking dan monitoring penyaluran Bantuan Pemerintah (Banpem) di sektor pertanian. Sistem ini dikembangkan untuk menjawab tantangan pengawasan distribusi bantuan yang sebelumnya dilakukan secara manual, sehingga rawan terjadi ketidakefisienan dan kurangnya transparansi data. Proyek ini dikerjakan secara full-stack, mulai dari perancangan antarmuka pengguna, pembangunan sistem backend, hingga integrasi database untuk menyimpan dan mengelola data penyaluran bantuan secara real time.
         </p>
-        <p class="project-achieve-title">Pencapaian:</p>
-        <ul class="project-achieve">
-          <li>Meningkatkan efisiensi dan transparansi distribusi bantuan pertanian</li>
-          <li>Dipresentasikan secara berkala di hadapan pejabat dan pegawai Kementerian</li>
-          <li>Diliput oleh media nasional (Kementerian Pertanian & Universitas YARSI)</li>
-        </ul>
         <div class="project-stack">
           <span class="stack-chip">HTML</span>
           <span class="stack-chip">CSS</span>
@@ -649,19 +651,6 @@
         <div class="carousel-dots" id="carousel-1-dots"></div>
       </div>
     </div>
-
-    <!-- PROJECT 2 (placeholder, ganti nanti) -->
-    <div class="project-card">
-      <div class="project-head">
-        <span class="project-name mono">nama-project-kamu</span>
-        <span class="project-status">draft</span>
-      </div>
-      <p class="project-desc">Deskripsi singkat project kedua kamu — ganti dengan project nyata yang sudah/sedang dikerjakan.</p>
-      <div class="project-stack">
-        <span class="stack-chip">—</span>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -698,26 +687,40 @@
           <span style="background: #ffbd2e;"></span>
           <span style="background: #27c93f;"></span>
         </div>
-        <div class="term-title">ssh fadhli@reach-me</div>
+        <div class="term-title">Lets Connect</div>
         <div style="width: 44px;"></div>
       </div>
       <div class="term-body">
-        <div class="term-line">
-          <span class="prompt-sym">$</span>
-          <span class="cmd-text">echo "let's connect"</span>
+    <div class="term-line">
+    <div class="social-icons">
+      <a href="#" class="social-icon" onclick="event.preventDefault()">
+        <img src="./src/assets/ig-icon.jpeg" alt="Instagram">
+        <span>@fawnderr_</span>
+      </a>
+      <a href="#" class="social-icon" onclick="event.preventDefault()">
+        <img src="./src/assets/tiktok-icon.jpeg" alt="TikTok">
+        <span>@ksnssnnsh_</span>
+      </a>
+      <a href="#" class="social-icon" onclick="event.preventDefault()">
+        <img src="./src/assets/linkedin-icon.jpeg" alt="LinkedIn">
+        <span>Muhammad Fadhli Wijaya</span>
+      </a>
+      <a href="#" class="social-icon" onclick="event.preventDefault()">
+        <img src="./src/assets/youtube-icon.jpeg" alt="YouTube">
+      <span>@Fadhli Wijaya</span>
+          </a>
         </div>
-        <span class="out-text">let's connect</span>
       </div>
     </div>
     <div class="contact-links">
-      <a class="contact-link" href="mailto:fadhliwijaya0988@gmail.com">
-        <i data-lucide="mail" style="width: 14px; height: 14px;"></i> email
+      <a class="contact-link" href="mailto:fadhliwijaya098@gmail.com">
+        <i data-lucide="mail" style="width: 16px; height: 18px;"></i> email
       </a>
-      <a class="contact-link" href="#" onclick="event.preventDefault()">
-        <i data-lucide="code" style="width: 14px; height: 14px;"></i> github
+      <a class="contact-link" href="https://github.com/fadhliwijaya098-cpu" target="_blank">
+        <i data-lucide="code" style="width: 16px; height: 18px;"></i> github
       </a>
-      <a class="contact-link" href="#" onclick="event.preventDefault()">
-        <i data-lucide="globe" style="width: 14px; height: 14px;"></i> linkedin
+      <a class="contact-link" href="https://www.linkedin.com/in/muhammad-fadhli-wijaya-a8b329311/" target="_blank">
+        <i data-lucide="globe" style="width: 16px; height: 18px;"></i> linkedin
       </a>
     </div>
   </section>
@@ -743,7 +746,7 @@
       for (let line of TYPE_LINES) {
         const lineDiv = document.createElement('div');
         lineDiv.className = 'term-line';
-        lineDiv.innerHTML = `<span class="prompt-sym">$</span><span class="cmd-text"></span><span class="out-text"></span>`;
+        lineDiv.innerHTML = `<span class="prompt-sym"><></span><span class="cmd-text"></span><span class="out-text"></span>`;
         container.appendChild(lineDiv);
 
         const cmdSpan = lineDiv.querySelector('.cmd-text');
