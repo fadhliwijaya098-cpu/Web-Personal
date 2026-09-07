@@ -1595,6 +1595,20 @@
     }
 
     initCarouselDots('carousel-1');
+    
+    // ===== HAPUS HASH (#section) DARI URL SAAT KLIK NAV =====
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+      // Bersihkan hash dari address bar tanpa reload halaman
+      history.replaceState(null, '', window.location.pathname);
+    }
+  });
+});
   </script>
 </body>
 </html>
