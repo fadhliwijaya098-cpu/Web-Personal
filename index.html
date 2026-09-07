@@ -242,6 +242,7 @@
       font-size: 15.5px;
       line-height: 1.85;
       color: var(--text-muted);
+      text-align: justify;
     }
     .about-text strong { color: var(--text); font-weight: 600; }
 
@@ -436,6 +437,11 @@
       gap: 16px;
       align-items: flex-start;
     }
+    .edu-inline {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
     .edu-icon {
       width: 38px; height: 38px;
       border-radius: 8px;
@@ -445,9 +451,9 @@
       color: var(--ember);
       flex-shrink: 0;
     }
-    .edu-title { font-size: 14.5px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
-    .edu-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
-    .edu-meta { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--text-dim); }
+    .edu-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+    .edu-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; }
+    .edu-meta { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--text-dim); }
 
     .contact-term { max-width: 660px; }
     .contact-links { display: flex; justify-content: center; gap: 26px; margin-top: 0px; margin-bottom: 26px; flex-wrap: wrap; }
@@ -489,7 +495,6 @@
         <a href="#about" class="nav-link">About</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#projects" class="nav-link">Projects</a>
-        <a href="#education" class="nav-link">Education</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
     </div>
@@ -506,7 +511,7 @@
           <span style="background: #ffbd2e;"></span>
           <span style="background: #27c93f;"></span>
         </div>
-        <div class="term-title">Dasboard</div>
+        <div class="term-title">Dashboard</div>
         <div style="width: 44px;"></div>
       </div>
       <div class="term-body" id="hero-terminal"></div>
@@ -525,6 +530,10 @@
       <a href="#contact" class="btn btn-ghost">
         Hubungi Saya
       </a>
+      <a href="./src/assets/CV.pdf" target="_blank" class="btn btn-ghost">
+    <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download CV
+  </a>
+</div>
     </div>
   </header>
 
@@ -547,17 +556,25 @@
       </div>
       <div class="term-body">
         <p class="about-text">
-          Mahasiswa Teknik Informatika Universitas YARSI dengan rekam jejak nyata dalam menerjemahkan teknologi menjadi solusi berdampak bagi masyarakat.
-          Memimpin pengembangan platform tracking Bantuan Pemerintah untuk Kementerian Pertanian RI menggunakan full stack development (HTML, CSS, JavaScript, PHP, MySQL, Java),
-          hingga diliput media nasional oleh Kementerian Pertanian dan Universitas YARSI
-          membuktikan kemampuan membangun produk teknologi yang benar benar digunakan dan memberi manfaat nyata, bukan sekadar proyek akademik.
+          Seorang Mahasiswa Teknik Informatika Universitas YARSI dengan latar belakang web development dan
+          pengalaman dalam pengembangan platform berbasis full stack. Berhasil memimpin pengembangan platform
+          tracking Bantuan Pemerintah untuk Kementerian Pertanian RI hingga mendapat liputan media nasional. Terbiasa
+          memimpin evaluasi serta mempresentasikan proyek di hadapan pejabat, sekaligus mengembangkan
+          kemampuan public speaking dan kepemimpinan tim. Aktif dalam organisasi eksternal lintas kampus serta
+          memperdalam kompetensi pemrograman menggunakan full stack.
         </p>
         <br />
-        <p class="about-text">
-          Terbiasa mempresentasikan hasil kerja secara berkala di hadapan pejabat, pegawai, dan civitas akademika, mengasah kemampuan public speaking, komunikasi teknis,
-          serta kepemimpinan dalam lingkungan profesional.
-        </p>
+        <div class="edu-inline">
+          <div class="edu-icon">
+            <i data-lucide="graduation-cap" style="width: 20px; height: 20px;"></i>
+          </div>
+         <div>
+            <div class="edu-title">S1 - Informatics Engineering</div>
+            <div class="edu-sub">Faculty of Information Technology, Yarsi University</div>
+            <div class="edu-meta">2025 — present | GPA 3.70/4.00</div>
+        </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -608,7 +625,7 @@
   <!-- PROJECTS -->
 <section id="projects" class="section">
   <div class="section-label">
-    <span class="section-n">03</span>
+    <span class="section-n">04</span>
     <span class="section-rule"></span>
     <span class="section-text">projects</span>
   </div>
@@ -654,25 +671,6 @@
   </div>
 </section>
 
-  <!-- EDUCATION -->
-  <section id="education" class="section">
-    <div class="section-label">
-      <span class="section-n">04</span>
-      <span class="section-rule"></span>
-      <span class="section-text">education</span>
-    </div>
-    <div class="edu-card">
-      <div class="edu-icon">
-        <i data-lucide="graduation-cap" style="width: 20px; height: 20px;"></i>
-      </div>
-      <div>
-        <div class="edu-title">S1 - Informatics Engineering</div>
-        <div class="edu-sub">Faculty of Information Technology, Yarsi University</div>
-        <div class="edu-meta">2025 — present | GPA 3.70/4.00</div>
-      </div>
-    </div>
-  </section>
-
   <!-- CONTACT -->
   <section id="contact" class="section contact-term">
     <div class="section-label">
@@ -687,25 +685,25 @@
           <span style="background: #ffbd2e;"></span>
           <span style="background: #27c93f;"></span>
         </div>
-        <div class="term-title">Lets Connect</div>
+        <div class="term-title">Let's Connect</div>
         <div style="width: 44px;"></div>
       </div>
       <div class="term-body">
     <div class="term-line">
     <div class="social-icons">
-      <a href="#" class="social-icon" onclick="event.preventDefault()">
+      <a href="https://www.instagram.com/fawnderr_?stkn=bmQwM2o1bjZycTFy" target="_blank" class="social-icon">
         <img src="./src/assets/ig-icon.jpeg" alt="Instagram">
         <span>@fawnderr_</span>
       </a>
-      <a href="#" class="social-icon" onclick="event.preventDefault()">
+      <a href="https://www.tiktok.com/@ksnssnnsh_?_r=1&_t=ZS-99VbDxoWGUG" target="_blank" class="social-icon">
         <img src="./src/assets/tiktok-icon.jpeg" alt="TikTok">
         <span>@ksnssnnsh_</span>
       </a>
-      <a href="#" class="social-icon" onclick="event.preventDefault()">
+      <a href="https://www.linkedin.com/in/muhammad-fadhli-wijaya-a8b329311?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="social-icon">
         <img src="./src/assets/linkedin-icon.jpeg" alt="LinkedIn">
         <span>Muhammad Fadhli Wijaya</span>
       </a>
-      <a href="#" class="social-icon" onclick="event.preventDefault()">
+      <a href="https://www.youtube.com/@FadhliWijaya" target="_blank" class="social-icon">
         <img src="./src/assets/youtube-icon.jpeg" alt="YouTube">
       <span>@Fadhli Wijaya</span>
           </a>
@@ -714,13 +712,13 @@
     </div>
     <div class="contact-links">
       <a class="contact-link" href="mailto:fadhliwijaya098@gmail.com">
-        <i data-lucide="mail" style="width: 16px; height: 18px;"></i> email
+        <i data-lucide="mail" style="width: 16px; height: 18px;"></i> Email
       </a>
       <a class="contact-link" href="https://github.com/fadhliwijaya098-cpu" target="_blank">
-        <i data-lucide="code" style="width: 16px; height: 18px;"></i> github
+        <i data-lucide="code" style="width: 16px; height: 18px;"></i> GitHub
       </a>
-      <a class="contact-link" href="https://www.linkedin.com/in/muhammad-fadhli-wijaya-a8b329311/" target="_blank">
-        <i data-lucide="globe" style="width: 16px; height: 18px;"></i> linkedin
+      <a class="contact-link" href="https://wa.me/6281234567890" target="_blank">
+        <i data-lucide="phone" style="width: 16px; height: 18px;"></i> WhatsApp
       </a>
     </div>
   </section>
