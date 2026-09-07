@@ -90,16 +90,86 @@
       color: var(--ember);
     }
     .nav-links { display: flex; gap: 24px; }
-    .nav-link {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12.5px;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 4px 2px;
-      transition: color 0.15s;
-    }
-    .nav-link:hover { color: var(--ember); }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-raised);
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.nav-link:visited {
+  color: #ffffff;
+}
 
+.nav-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.nav-menu-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+.nav-close {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.nav-close:hover {
+  border-color: var(--ember);
+  color: var(--ember);
+}
+.nav-toggle {
+  display: block;
+  background: none;
+  border: none;
+  color: var(--ember);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-links {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: auto;
+  width: 60%;
+  background: rgba(10, 5, 5, 0.97);
+  padding: 16px 24px 24px;
+  border-bottom: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  border-bottom-left-radius: 10px;
+}
+
+.nav-links.open {
+  display: flex;
+}
+
+.nav-link:hover {
+  border-color: var(--ember);
+  color: var(--ember);
+  background: rgba(255, 77, 61, 0.08);
+}
     .hero {
       max-width: 900px;
       margin: 0 auto;
@@ -484,21 +554,30 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="nav-brand">
-        <span>WELCOME TO MY WEBSITE</span>
-      </div>
-      <div class="nav-links">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <i data-lucide="terminal" style="width: 1px; height: 15px;"></i>
+      <span>Muhammad Fadhli Wijaya | Portfolio</span>
     </div>
-  </nav>
+    <button class="nav-toggle" onclick="toggleNav()">
+      <i data-lucide="menu" style="width: 22px; height: 22px;"></i>
+    </button>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <div class="nav-menu-header">
+      <span class="nav-menu-title">Menu</span>
+      <button class="nav-close" onclick="toggleNav()">
+        <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+      </button>
+    </div>
+    <a href="#home" class="nav-link"><i data-lucide="home" style="width:16px;height:16px;"></i> Home</a>
+    <a href="#about" class="nav-link"><i data-lucide="user" style="width:16px;height:16px;"></i> About</a>
+    <a href="#skills" class="nav-link"><i data-lucide="cpu" style="width:16px;height:16px;"></i> Skills</a>
+    <a href="#projects" class="nav-link"><i data-lucide="folder-kanban" style="width:16px;height:16px;"></i> Projects</a>
+    <a href="#contact" class="nav-link"><i data-lucide="mail" style="width:16px;height:16px;"></i> Contact</a>
+  </div>
+</nav>
 
   <!-- HERO -->
   <header id="home" class="hero">
@@ -527,10 +606,7 @@
       <a href="#projects" class="btn btn-primary">
         Lihat Project <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
       </a>
-      <a href="#contact" class="btn btn-ghost">
-        Hubungi Saya
-      </a>
-      <a href="/assets/CV.pdf" target="_blank" class="btn btn-ghost">
+      <a href="public/assets/CV.pdf" target="_blank" class="btn btn-ghost">
     <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download CV
   </a>
 </div>
@@ -654,9 +730,9 @@
       <div class="project-media-col">
         <div class="project-carousel">
           <div class="carousel-track" id="carousel-1">
-            <div class="carousel-slide"><img src="/assets/banpem-tracking-website.jpeg" alt="Tampilan website tracking Banpem"></div>
-            <div class="carousel-slide"><img src="/assets/gambar-3.jpeg" alt="Kode program"></div>
-            <div class="carousel-slide"><img src="/assets/gambar-2.jpeg" alt="Presentasi project"></div>
+            <div class="carousel-slide"><img src="public/assets/banpem-tracking-website.jpeg" alt="Tampilan website tracking Banpem"></div>
+            <div class="carousel-slide"><img src="public/assets/gambar-3.jpeg" alt="Kode program"></div>
+            <div class="carousel-slide"><img src="public/assets/gambar-2.jpeg" alt="Presentasi project"></div>
           </div>
           <button class="carousel-btn prev" onclick="slideCarousel('carousel-1', -1)">
             <i data-lucide="chevron-left" style="width:16px;height:16px;"></i>
@@ -692,19 +768,19 @@
     <div class="term-line">
     <div class="social-icons">
       <a href="https://www.instagram.com/fawnderr_?stkn=bmQwM2o1bjZycTFy" target="_blank" class="social-icon">
-        <img src="/assets/ig-icon.jpeg" alt="Instagram">
+        <img src="public/assets/ig-icon.jpeg" alt="Instagram">
         <span>@fawnderr_</span>
       </a>
       <a href="https://www.tiktok.com/@ksnssnnsh_?_r=1&_t=ZS-99VbDxoWGUG" target="_blank" class="social-icon">
-        <img src="/assets/tiktok-icon.jpeg" alt="TikTok">
+        <img src="public/assets/tiktok-icon.jpeg" alt="TikTok">
         <span>@ksnssnnsh_</span>
       </a>
       <a href="https://www.linkedin.com/in/muhammad-fadhli-wijaya-a8b329311?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="social-icon">
-        <img src="/assets/linkedin-icon.jpeg" alt="LinkedIn">
+        <img src="public/assets/linkedin-icon.jpeg" alt="LinkedIn">
         <span>Muhammad Fadhli Wijaya</span>
       </a>
       <a href="https://www.youtube.com/@FadhliWijaya" target="_blank" class="social-icon">
-        <img src="/assets/youtube-icon.jpeg" alt="YouTube">
+        <img src="public/assets/youtube-icon.jpeg" alt="YouTube">
       <span>@Fadhli Wijaya</span>
           </a>
         </div>
@@ -731,6 +807,11 @@
   <!-- SCRIPT UNTUK EFEK KETIK TERMINAL & CAROUSEL -->
   <script>
     lucide.createIcons();
+     function toggleNav() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('open');
+      document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+    }
 
     const TYPE_LINES = [
       { cmd: 'Name', out: 'Muhammad Fadhli Wijaya' },
