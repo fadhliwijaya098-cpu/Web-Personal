@@ -675,11 +675,11 @@
     .stack-chip {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10.5px;
-      color: var(--text-dim);
-      background: var(--bg-panel);
+      color: var(--text);
+      background: rgba(255, 77, 61, 0.15);
       padding: 3px 8px;
       border-radius: 4px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--ember-soft);
     }
 
     /* Grid: left = info, right = media column that gets vertically centered */
@@ -1399,7 +1399,7 @@
       <a href="#projects" class="btn btn-primary">
         Lihat Project <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i>
       </a>
-      <a href="public/assets/CV.pdf" target="_blank" class="btn btn-ghost">
+      <a href="/assets/CV.pdf" target="_blank" class="btn btn-ghost">
     <i data-lucide="download" style="width: 14px; height: 14px;"></i> Download CV
   </a>
 </div>
@@ -1508,7 +1508,11 @@
           <span class="project-status completed">completed</span>
         </div>
         <p class="project-desc">
-          Platform berbasis web yang dirancang untuk membantu Balai Besar Penerapan Modernisasi Pertanian (BRMP) Jawa Barat, Kementerian Pertanian RI, dalam melakukan tracking dan monitoring penyaluran Bantuan Pemerintah (Banpem) di sektor pertanian. Sistem ini dikembangkan untuk menjawab tantangan pengawasan distribusi bantuan yang sebelumnya dilakukan secara manual, sehingga rawan terjadi ketidakefisienan dan kurangnya transparansi data. Proyek ini dikerjakan secara full-stack, mulai dari perancangan antarmuka pengguna, pembangunan sistem backend, hingga integrasi database untuk menyimpan dan mengelola data penyaluran bantuan secara real time.
+          Platform berbasis web yang dirancang untuk membantu Balai Besar Penerapan Modernisasi Pertanian (BRMP) Jawa Barat, 
+          Kementerian Pertanian RI, dalam melakukan tracking dan monitoring penyaluran Bantuan Pemerintah (Banpem) di sektor pertanian. 
+          Sistem ini dikembangkan untuk menjawab tantangan pengawasan distribusi bantuan yang sebelumnya dilakukan secara manual, 
+          sehingga rawan terjadi ketidakefisienan dan kurangnya transparansi data. Proyek ini dikerjakan secara full-stack, mulai dari perancangan antarmuka pengguna, 
+          pembangunan sistem backend, hingga integrasi database untuk menyimpan dan mengelola data penyaluran bantuan secara real time.
         </p>
         <div class="project-stack">
           <span class="stack-chip">HTML</span>
@@ -1535,6 +1539,156 @@
           </button>
         </div>
         <div class="carousel-dots" id="carousel-1-dots"></div>
+      </div>
+    </div>
+
+<!-- PROJECT 2 -->
+    <div class="project-card project-card-media">
+      <div class="project-info">
+        <div class="project-head">
+          <span class="project-name mono">Point of Sale Application (Alfamart POS)</span>
+          <span class="project-status completed">completed</span>
+        </div>
+        <p class="project-desc">
+          Aplikasi Point of Sale (POS) berbasis desktop yang dirancang untuk mensimulasikan
+          sistem transaksi retail seperti yang digunakan oleh Alfamart. Aplikasi ini dibangun
+          menggunakan Java dengan antarmuka grafis (GUI) untuk memudahkan proses input
+          data produk, transaksi penjualan, hingga perhitungan total dan kembalian secara
+          otomatis. Proyek ini dikembangkan sebagai simulasi nyata untuk menerapkan konsep
+          retail business logic, database management, dan desktop UI design dalam satu
+          sistem yang terintegrasi dengan database MySQL
+        </p>
+        <div class="project-stack">
+          <span class="stack-chip">Java</span>
+          <span class="stack-chip">MySQL</span>
+          <span class="stack-chip">GUI Development</span>
+        </div>
+      </div>
+
+      <!-- MEDIA COLUMN -->
+      <div class="project-media-col">
+        <div class="project-carousel">
+          <div class="carousel-track" id="carousel-2">
+            <div class="carousel-slide"><img src="public/assets/project2.1.jpeg" alt="Tampilan 1"></div>
+            <div class="carousel-slide"><img src="public/assets/project2.2.jpeg" alt="Tampilan 2"></div>
+            <div class="carousel-slide"><img src="public/assets/project2.3.jpeg" alt="Tampilan 3"></div>
+          </div>
+          <button class="carousel-btn prev" onclick="slideCarousel('carousel-2', -1)">
+            <i data-lucide="chevron-left" style="width:16px;height:16px;"></i>
+          </button>
+          <button class="carousel-btn next" onclick="slideCarousel('carousel-2', 1)">
+            <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+          </button>
+        </div>
+        <div class="carousel-dots" id="carousel-2-dots"></div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project-card project-card-media">
+      <div class="project-info">
+        <div class="project-head">
+          <span class="project-name mono">LibroTrack</span>
+          <span class="project-status completed">completed</span>
+        </div>
+        <p class="project-desc">
+          Aplikasi manajemen perpustakaan berbasis desktop yang dirancang untuk membantu
+          proses pengelolaan buku dan anggota perpustakaan secara lebih terstruktur dan
+          efisien. Aplikasi ini dibangun menggunakan Java, dengan fitur utama mencakup
+          katalogisasi buku, pengelolaan data anggota, serta pelacakan proses peminjaman
+          dan pengembalian buku. Seluruh data disimpan dan dikelola menggunakan database
+          MySQL, sehingga informasi dapat diakses dan diperbarui secara terpusat dan real-
+          time.
+        </p>
+        <div class="project-stack">
+          <span class="stack-chip">Java</span>
+          <span class="stack-chip">MySQL</span>
+        </div>
+      </div>
+      <div class="project-media-col">
+        <div class="project-carousel">
+          <div class="carousel-track" id="carousel-3">
+            <div class="carousel-slide"><img src="public/assets/project 3.1.jpeg" alt="Tampilan 1"></div>
+            <div class="carousel-slide"><img src="public/assets/project 3.2.jpeg" alt="Tampilan 2"></div>
+            <div class="carousel-slide"><img src="public/assets/project 3.3.jpeg" alt="Tampilan 3"></div>
+          </div>
+          <button class="carousel-btn prev" onclick="slideCarousel('carousel-3', -1)"><i data-lucide="chevron-left" style="width:16px;height:16px;"></i></button>
+          <button class="carousel-btn next" onclick="slideCarousel('carousel-3', 1)"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></button>
+        </div>
+        <div class="carousel-dots" id="carousel-3-dots"></div>
+      </div>
+    </div>
+
+    <!-- PROJECT 4 -->
+    <div class="project-card project-card-media">
+      <div class="project-info">
+        <div class="project-head">
+          <span class="project-name mono">Pengabdian Masyarakat</span>
+          <span class="project-status completed">completed</span>
+        </div>
+        <p class="project-desc">
+          Program edukasi teknologi yang diselenggarakan oleh kelompok mahasiswa
+          Universitas YARSI kepada siswa SMA, sebagai bagian dari kegiatan pengabdian
+          masyarakat kampus. Program ini bertujuan meningkatkan pemahaman generasi
+          muda mengenai perkembangan teknologi di era digital. Sebagai pemateri, saya
+          menyampaikan materi tentang pengenalan teknologi masa kini serta pentingnya
+          menggunakan teknologi secara bijak dan bertanggung jawab, agar siswa dapat
+          memanfaatkan teknologi secara positif dan menghindari dampak negatif dari
+          penyalahgunaannya.
+        </p>
+        <div class="project-stack">
+          <span class="stack-chip">Pemateri / Fasilitator</span>
+        </div>
+      </div>
+      <div class="project-media-col">
+        <div class="project-carousel">
+          <div class="carousel-track" id="carousel-4">
+            <div class="carousel-slide"><img src="public/assets/project4.1.jpeg" alt="Tampilan 1"></div>
+            <div class="carousel-slide"><img src="public/assets/project4.3.jpeg" alt="Tampilan 2"></div>
+            <div class="carousel-slide"><img src="public/assets/project4.2.jpeg" alt="Tampilan 3"></div>
+          </div>
+          <button class="carousel-btn prev" onclick="slideCarousel('carousel-4', -1)"><i data-lucide="chevron-left" style="width:16px;height:16px;"></i></button>
+          <button class="carousel-btn next" onclick="slideCarousel('carousel-4', 1)"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></button>
+        </div>
+        <div class="carousel-dots" id="carousel-4-dots"></div>
+      </div>
+    </div>
+
+    <!-- PROJECT 5 -->
+    <div class="project-card project-card-media">
+      <div class="project-info">
+        <div class="project-head">
+          <span class="project-name mono">Aerondom Rudal Balistik</span>
+          <span class="project-status completed">completed</span>
+        </div>
+        <p class="project-desc">
+          Proyek tugas akhir mata kuliah Organisasi dan Arsitektur Komputer, berupa prototipe
+          sistem "Auto Firing Missile" berbasis mikrokontroler Arduino. Sistem ini dirancang
+          untuk mendeteksi objek menggunakan sensor ultrasonik, kemudian menggerakkan
+          mekanisme peluncur secara otomatis melalui motor servo berdasarkan jarak objek
+          yang terdeteksi. Proyek ini menerapkan konsep dasar elektronika, pemrograman
+          mikrokontroler, dan rangkaian sirkuit dalam satu sistem yang terintegrasi.
+        </p>
+        <div class="project-stack">
+          <span class="stack-chip">Arduino Uno</span>
+          <span class="stack-chip"> Sensor Ultrasonic (HC-SR04)</span>
+          <span class="stack-chip">Micro Servo (SG90)</span>
+          <span class="stack-chip">Servo MG996R</span>
+          <span class="stack-chip">Breadboard</span>
+          <span class="stack-chip">Kabel Jumper</span>
+        </div>
+      </div>
+      <div class="project-media-col">
+        <div class="project-carousel">
+          <div class="carousel-track" id="carousel-5">
+            <div class="carousel-slide"><img src="public/assets/project5.2.jpeg" alt="Tampilan 1"></div>
+            <div class="carousel-slide"><img src="public/assets/project5.1.jpeg" alt="Tampilan 2"></div>
+            <div class="carousel-slide"><img src="public/assets/project5.3.jpeg" alt="Tampilan 3"></div>
+          </div>
+          <button class="carousel-btn prev" onclick="slideCarousel('carousel-5', -1)"><i data-lucide="chevron-left" style="width:16px;height:16px;"></i></button>
+          <button class="carousel-btn next" onclick="slideCarousel('carousel-5', 1)"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></button>
+        </div>
+        <div class="carousel-dots" id="carousel-5-dots"></div>
       </div>
     </div>
   </div>
@@ -1833,6 +1987,10 @@
     }
 
     initCarouselDots('carousel-1');
+    initCarouselDots('carousel-2');
+    initCarouselDots('carousel-3')
+    initCarouselDots('carousel-4')
+    initCarouselDots('carousel-5')
 
     // ===== DAFTAR SERTIFIKAT =====
     // Tinggal tambah 1 blok { ... } untuk tiap sertifikat baru, lalu koma.
