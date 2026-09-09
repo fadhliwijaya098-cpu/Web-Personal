@@ -64,6 +64,245 @@
 
     .mono { font-family: 'JetBrains Mono', monospace; }
 
+/* ===== INTRO SCREEN ===== */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(ellipse at 50% 30%, #200a0a 0%, #0a0303 55%, #000000 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), visibility 0.7s;
+}
+.intro-screen.intro-hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Bintang latar, tersebar & berkelip lembut sepanjang intro */
+.intro-bg-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.intro-bg-star {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: intro-star-twinkle ease-in-out infinite;
+}
+@keyframes intro-star-twinkle {
+  0%   { opacity: 0; }
+  8%   { opacity: var(--maxop, 0.9); }
+  50%  { opacity: calc(var(--maxop, 0.9) * 0.25); }
+  100% { opacity: var(--maxop, 0.9); }
+}
+
+/* Bintang depan yang nanti "mengumpul" ke tengah */
+.intro-converge-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.intro-star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffe9d8;
+  box-shadow: 0 0 8px 2px rgba(255, 220, 190, 0.85);
+  opacity: 0;
+  transform: translate(-50%, -50%) translate(var(--sx), var(--sy)) scale(1);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+}
+.intro-star.intro-star-show {
+  opacity: 1;
+}
+.intro-star.intro-star-converge {
+  opacity: 0;
+  transform: translate(-50%, -50%) translate(0, 0) scale(0.2);
+}
+
+/* Kilat menyambar penuh layar */
+.intro-bolt-full {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(85vw, 620px);
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(230, 240, 255, 0.95)) drop-shadow(0 0 22px rgba(180, 210, 255, 0.7)) drop-shadow(0 0 44px rgba(255, 77, 61, 0.4));
+}
+.bolt-line {
+  fill: none;
+  stroke: #f6faff;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  opacity: 0;
+}
+.bolt-main {
+  stroke-width: 2.2;
+}
+
+.intro-bolt-full.intro-bolt-run .bolt-main {
+  animation: bolt-draw 0.42s ease-out forwards, bolt-flicker 1.3s ease-in-out 0.42s forwards;
+}
+.intro-bolt-full.intro-bolt-run .bolt-branch {
+  animation: bolt-draw 0.28s ease-out forwards, bolt-flicker 1.3s ease-in-out forwards;
+}
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(2)  { animation-delay: 0.10s, 0.38s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(3)  { animation-delay: 0.14s, 0.42s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(4)  { animation-delay: 0.16s, 0.44s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(5)  { animation-delay: 0.19s, 0.47s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(6)  { animation-delay: 0.21s, 0.49s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(7)  { animation-delay: 0.23s, 0.51s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(8)  { animation-delay: 0.25s, 0.53s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(9)  { animation-delay: 0.27s, 0.55s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(10) { animation-delay: 0.29s, 0.57s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(11) { animation-delay: 0.31s, 0.59s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(12) { animation-delay: 0.33s, 0.61s; }
+.intro-bolt-full.intro-bolt-run .bolt-branch:nth-of-type(13) { animation-delay: 0.35s, 0.63s; }
+
+@keyframes bolt-draw {
+  0%   { stroke-dashoffset: 260; opacity: 1; }
+  60%  { stroke-dashoffset: 0;   opacity: 1; }
+  100% { stroke-dashoffset: 0;   opacity: 1; }
+}
+@keyframes bolt-flicker {
+  0%   { opacity: 1; }
+  8%   { opacity: 0.25; }
+  16%  { opacity: 1; }
+  24%  { opacity: 0.4; }
+  32%  { opacity: 0.95; }
+  42%  { opacity: 0.5; }
+  55%  { opacity: 0.85; }
+  68%  { opacity: 0.35; }
+  80%  { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+.intro-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff3ea;
+  opacity: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.intro-flash.intro-flash-run {
+  animation: intro-flash-anim 0.5s ease-out forwards;
+}
+@keyframes intro-flash-anim {
+  0%   { opacity: 0; }
+  10%  { opacity: 0.75; }
+  25%  { opacity: 0.05; }
+  40%  { opacity: 0.4; }
+  100% { opacity: 0; }
+}
+
+.intro-title {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+.intro-title-line {
+  display: block;
+  font-size: clamp(22px, 4.5vw, 40px);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.intro-title-line.intro-title-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.intro-title-white { color: #f2e9e4; margin-bottom: 6px; }
+.intro-title-red   { color: var(--ember); text-shadow: 0 0 24px rgba(255, 77, 61, 0.45); }
+
+.intro-loading {
+  position: relative;
+  z-index: 5;
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.intro-loading.intro-loading-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.intro-loading-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+.intro-loading-label span { color: var(--ember); margin-left: 6px; }
+.intro-bar-track {
+  width: 180px;
+  height: 3px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.15);
+  overflow: hidden;
+}
+.intro-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--garnet), var(--ember));
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(255, 77, 61, 0.6);
+  transition: width 0.15s linear;
+}
+
+    /* ===== BACKGROUND TRANSISI HITAM <-> MERAH ===== */
+    .bg-transition {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+     pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+    }
+    .bg-layer-a {
+      background: radial-gradient(ellipse at 30% 20%, #170606 0%, #0a0303 55%, #000000 100%);
+    }
+    .bg-layer-b {
+      background: radial-gradient(ellipse at 70% 75%, rgba(179, 24, 31, 0.45) 0%, rgba(255, 77, 61, 0.12) 35%, transparent 65%);
+      animation: bg-pulse 13s ease-in-out infinite;
+    }
+    .bg-layer-c {
+      background: radial-gradient(ellipse at 15% 80%, rgba(255, 77, 61, 0.3) 0%, transparent 55%);
+      animation: bg-pulse 17s ease-in-out infinite reverse;
+    }
+
+@keyframes bg-pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.65; }
+}
+
     /* NAV */
     .nav {
       position: sticky;
@@ -74,20 +313,23 @@
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
-      max-width: 1000px;
+      max-width: 1900px;
       margin: 0 auto;
-      padding: 14px 24px;
+      padding: 19px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
+      gap: 24px;
     }
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 14px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
       color: var(--ember);
+      flex-shrink: 0;
     }
     .nav-links { display: flex; gap: 24px; }
 .nav-link {
@@ -171,9 +413,11 @@
   background: rgba(255, 77, 61, 0.08);
 }
     .hero {
-      max-width: 900px;
+      max-width: 1300px;
       margin: 0 auto;
-      padding: 90px 24px 70px;
+      padding: 60px 40px 25px;
+       position: relative;
+        z-index: 10;
     }
     .hero-eyebrow {
       font-family: 'JetBrains Mono', monospace;
@@ -239,7 +483,7 @@
       font-weight: 700;
       font-size: clamp(28px, 5vw, 44px);
       letter-spacing: -0.01em;
-      margin: 15px 0 6px;
+      margin: 40px 0 6px;
       color: var(--text);
       text-shadow: 0 0 30px rgba(255,77,61,0.15);
     }
@@ -277,19 +521,31 @@
       color: #fff;
     }
     .btn-primary:hover { background: var(--ember); border-color: var(--ember); box-shadow: 0 0 20px var(--ember-soft); }
-    .btn-ghost:hover { border-color: var(--ember); color: var(--ember); }
+    .btn-ghost {
+  background: var(--bg-panel);
+  border-color: var(--ember);
+  color: #ffffff;
+}
+
+.btn-ghost:hover {
+  background: var(--garnet);
+  border-color: var(--ember);
+  color: #ffffff;
+  box-shadow: 0 0 20px var(--ember-soft);
+}
 
     /* SECTIONS */
     .section {
-      max-width: 900px;
+      max-width: 1300px;
       margin: 0 auto;
-      padding: 50px 24px;
+      padding: 50px 40px;
     }
     .section-label {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-bottom: 28px;
+      flex-wrap: wrap;
     }
     .section-n {
       font-family: 'JetBrains Mono', monospace;
@@ -306,6 +562,27 @@
       color: var(--text-dim);
       letter-spacing: 0.1em;
       text-transform: uppercase;
+    }
+
+    /* Link kecil di pojok kanan atas section (dipakai utk "Sertifikat" di Projects) */
+    .section-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ember);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .section-cta:hover {
+      border-color: var(--ember);
+      box-shadow: 0 0 14px var(--ember-soft);
+      background: rgba(255, 77, 61, 0.08);
     }
 
     .about-text {
@@ -325,14 +602,17 @@
     .skill-card {
       background: var(--bg-raised);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 18px 20px;
+      box-shadow:
+        0 0 0 1px rgba(255, 77, 61, 0.06),
+        0 20px 60px -20px rgba(0, 0, 0, 0.8);
     }
     .skill-group {
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
       color: var(--ember);
-      margin-bottom: 12px;
+      margin-bottom: 18px;
     }
     .skill-item {
       font-family: 'JetBrains Mono', monospace;
@@ -349,9 +629,12 @@
     .project-card {
       background: var(--bg-raised);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 20px 22px;
       transition: border-color 0.15s;
+      box-shadow:
+        0 0 0 1px rgba(255, 77, 61, 0.06),
+        0 20px 60px -20px rgba(0, 0, 0, 0.8);
     }
     .project-card:hover { border-color: var(--garnet); }
     .project-head {
@@ -388,7 +671,7 @@
       margin-bottom: 13px;
       text-align: justify;
     }
-    .project-stack { display: flex; gap: 8px; flex-wrap: wrap; }
+    .project-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 90px;}
     .stack-chip {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10.5px;
@@ -435,9 +718,13 @@
     }
 
     /* CAROUSEL GALLERY */
-    .project-carousel {
-      position: relative;
-    }
+    .section {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 50px 40px;
+  position: relative;
+  z-index: 10;
+}
     .carousel-track {
       display: flex;
       overflow-x: auto;
@@ -464,7 +751,7 @@
     }
     .carousel-btn {
       position: absolute;
-      top: 50%;
+      top: calc(50% + 30px);
       transform: translateY(-50%);
       width: 34px;
       height: 34px;
@@ -480,8 +767,8 @@
       transition: all 0.15s;
     }
     .carousel-btn:hover { border-color: var(--ember); color: var(--ember); box-shadow: 0 0 14px var(--ember-soft); }
-    .carousel-btn.prev { left: 10px; }
-    .carousel-btn.next { right: 10px; }
+    .carousel-btn.prev { left: 670px; }
+    .carousel-btn.next { right: 45px; }
     .carousel-dots {
       display: flex;
       justify-content: center;
@@ -525,6 +812,186 @@
     .edu-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; }
     .edu-meta { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--text-dim); }
 
+    /* ===== CERTIFICATES ===== */
+    .cert-filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+    .cert-filter-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg-raised);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .cert-filter-btn:hover {
+      border-color: var(--ember);
+      color: var(--ember);
+    }
+    .cert-filter-btn.active {
+      background: var(--garnet);
+      border-color: var(--garnet);
+      color: #fff;
+    }
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+    @media (max-width: 900px) { .cert-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .cert-grid { grid-template-columns: 1fr; } }
+    .cert-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: border-color 0.15s;
+      box-shadow:
+        0 0 0 1px rgba(255, 77, 61, 0.06),
+        0 20px 60px -20px rgba(0, 0, 0, 0.8);
+    }
+    .cert-card:hover { border-color: var(--garnet); }
+    .cert-card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--bg-panel);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      overflow: hidden;
+    }
+    .cert-card-img img {
+      width: 100%;
+      height: 100%;
+      height: cover;
+      object-position: center;
+      display: block;
+    }
+    .cert-card-body {
+     padding: 12px 16px 16px;
+     flex: 1;
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+    }
+    .cert-card-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ember);
+      border: 1px solid var(--ember-soft);
+      padding: 2px 9px;
+      border-radius: 20px;
+      margin-bottom: 9px;
+    }
+    .cert-card-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .cert-card-issuer {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+    .cert-card-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .cert-empty {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .cert-pager {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cert-pager-btn {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-raised);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .cert-pager-btn:hover:not(:disabled) {
+      border-color: var(--ember);
+      color: var(--ember);
+      box-shadow: 0 0 14px var(--ember-soft);
+    }
+    .cert-pager-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+    .cert-grid-viewport {
+      flex: 1;
+     overflow: hidden;
+    }
+
+    @keyframes certSlideOutLeft {
+      from { transform: translateX(0); opacity: 1; }
+      to   { transform: translateX(-36px); opacity: 0; }
+    }
+    @keyframes certSlideOutRight {
+     from { transform: translateX(0); opacity: 1; }
+     to   { transform: translateX(36px); opacity: 0; }
+    }
+    @keyframes certSlideInFromRight {
+      from { transform: translateX(36px); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes certSlideInFromLeft {
+      from { transform: translateX(-36px); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+
+.cert-slide-out-left  { animation: certSlideOutLeft 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.cert-slide-out-right { animation: certSlideOutRight 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.cert-slide-in-right  { animation: certSlideInFromRight 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.cert-slide-in-left   { animation: certSlideInFromLeft 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .cert-page-dots {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 20px;
+    }
+    .cert-page-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .cert-page-dot.active { background: var(--ember); }
+
     .contact-term { max-width: 660px; }
     .contact-links { display: flex; justify-content: center; gap: 26px; margin-top: 0px; margin-bottom: 26px; flex-wrap: wrap; }
     .contact-link {
@@ -550,32 +1017,358 @@
       font-size: 11.5px;
       color: var(--text-dim);
     }
+
+    /* ===== NAV RESPONSIVE: horizontal di layar lebar, hamburger di layar kecil ===== */
+    @media (min-width: 900px) {
+      .nav-toggle { display: none; }
+
+      .nav-links {
+        display: flex !important;
+        flex-direction: row;
+        position: static;
+        width: auto;
+        height: auto;
+        background: transparent;
+        border-left: none;
+        border-bottom: none;
+        padding: 0;
+        gap: 14px;
+        overflow: visible;
+      }
+
+      .nav-menu-header { display: none; }
+
+      .nav-link {
+        padding: 8px 14px;
+        border: none;
+        background: transparent;
+      }
+      .nav-link:hover {
+        background: rgba(255, 77, 61, 0.08);
+        border-radius: 8px;
+      }
+    }
+
+    /* ===== ANIMASI BLACK HOLE DI SISI KIRI-KANAN ===== */
+    .blackhole {
+      position: fixed;
+      top: 50%;
+      width: 280px;
+      height: 280px;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        var(--ember) 40deg,
+        transparent 90deg,
+        var(--garnet) 160deg,
+        transparent 210deg,
+        var(--ember) 280deg,
+        transparent 340deg
+      );
+      filter: blur(2px);
+      opacity: 0.35;
+      z-index: 1;
+      pointer-events: none;
+      animation: spin-hole 14s linear infinite;
+    }
+    .blackhole::after {
+      content: '';
+      position: absolute;
+      inset: 30%;
+      background: var(--bg);
+      border-radius: 50%;
+      box-shadow: 0 0 40px 10px rgba(0,0,0,0.9);
+    }
+    .blackhole-left { left: -140px; }
+    .blackhole-right { right: -140px; animation-direction: reverse; }
+
+    @keyframes spin-hole {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    @media (max-width: 1400px) {
+      .blackhole { display: none; }
+    }
+    /* ===== PLANET TAMBAHAN ===== */
+/* ===== PLANET TAMBAHAN (bertekstur, ala gas giant) ===== */
+/* ===== PLANET NEBULA (swirl warna-warni, ala galaxy orb) ===== */
+/* ===== PLANET DEKORATIF (gas giant style, senada tema merah-ember) ===== */
+/* ===== PLANET DEKORATIF — gas giant realistis, tema merah-ember ===== */
+.planet {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  isolation: isolate;
+  animation: float-planet 9s ease-in-out infinite;
+}
+
+/* Layer band horizontal (garis-garis gas), muter pelan */
+.planet::before {
+  content: '';
+  position: absolute;
+  inset: -20% -40%;
+  background: repeating-linear-gradient(
+    0deg,
+    #2c0808 0%,
+    #5c120f 4%,
+    var(--garnet) 8%,
+    #a82a1e 11%,
+    var(--ember) 15%,
+    #ff8a63 18%,
+    #ffcfa8 21%,
+    var(--ember) 25%,
+    #c23524 29%,
+    var(--garnet) 33%,
+    #3a0a0a 38%,
+    #7a1a12 43%,
+    var(--ember) 48%,
+    #ffdcb8 52%,
+    var(--ember) 56%,
+    #a82a1e 61%,
+    var(--garnet) 66%,
+    #5c120f 71%,
+    var(--ember) 76%,
+    #ffcfa8 80%,
+    var(--ember) 85%,
+    #7a1a12 90%,
+    var(--garnet) 95%,
+    #2c0808 100%
+  );
+  animation: drift-bands 22s linear infinite;
+}
+
+/* Titik badai kecil ala Great Red Spot */
+.planet::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 22% 12% at 68% 58%, rgba(255, 200, 170, 0.55), transparent 70%),
+    radial-gradient(circle at 30% 24%, rgba(255,255,255,0.65), transparent 32%),
+    radial-gradient(circle at 68% 78%, rgba(0,0,0,0.6), transparent 55%);
+  mix-blend-mode: overlay;
+}
+
+.planet-1 {
+  top: 14%;
+  left: 44px;
+  width: 100px;
+  height: 100px;
+  box-shadow:
+    0 0 20px 4px rgba(255, 154, 92, 0.35),
+    0 0 45px 10px rgba(255, 77, 61, 0.3),
+    0 0 80px 18px rgba(179, 24, 31, 0.18);
+}
+
+.planet-2 {
+  bottom: 11%;
+  left: 96px;
+  width: 48px;
+  height: 48px;
+  animation-delay: 2s;
+  box-shadow:
+    0 0 12px 3px rgba(255, 154, 92, 0.3),
+    0 0 26px 6px rgba(255, 77, 61, 0.25);
+}
+.planet-2::before { animation-duration: 16s; }
+
+.planet-3 {
+  top: 19%;
+  right: 64px;
+  width: 74px;
+  height: 74px;
+  animation-delay: 1s;
+  box-shadow:
+    0 0 16px 3px rgba(255, 205, 184, 0.3),
+    0 0 34px 8px rgba(179, 24, 31, 0.28);
+}
+.planet-3::before { animation-duration: 28s; animation-direction: reverse; }
+
+/* Cincin planet-3, ala Saturnus, melintang di depan & belakang bola */
+.planet-ring-wrap {
+  position: fixed;
+  top: 19%;
+  right: 64px;
+  width: 74px;
+  height: 74px;
+  pointer-events: none;
+  z-index: 2;
+  transform: translate(0, 0);
+}
+.planet-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 168%;
+  height: 38%;
+  transform: translate(-50%, -50%) rotate(-16deg);
+  border: 3px solid rgba(255, 205, 184, 0.55);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 205, 184, 0.25);
+}
+.planet-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border-top: 3px solid rgba(255, 235, 220, 0.9);
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+}
+
+/* Starfield: bintang kecil tersebar di seluruh halaman, dibuat otomatis via JS */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.sky-star {
+  position: absolute;
+  border-radius: 50%;
+  animation: twinkle ease-in-out infinite;
+}
+
+@keyframes float-planet {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+@keyframes drift-bands {
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+@media (max-width: 1400px) {
+  .planet, .planet-ring-wrap { display: none; }
+}
+/* ===== METEOR JATUH ===== */
+.meteor {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff8f0;
+  box-shadow: 0 0 8px 2px rgba(255, 240, 220, 0.9);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+}
+.meteor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 110px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 235, 210, 0.85));
+  transform: translateY(-50%);
+}
+
+.meteor-1 { top: 6%;  left: 18%; animation: meteor-fall 6.5s linear infinite; animation-delay: 0.5s; }
+.meteor-2 { top: 12%; left: 55%; animation: meteor-fall 8s linear infinite; animation-delay: 3.2s; }
+.meteor-3 { top: 3%;  left: 78%; animation: meteor-fall 7.2s linear infinite; animation-delay: 5.8s; }
+.meteor-4 { top: 22%; left: 8%;  animation: meteor-fall 9s linear infinite; animation-delay: 7.5s; }
+.meteor-5 { top: 9%;  left: 92%; animation: meteor-fall 6.8s linear infinite; animation-delay: 1.8s; }
+
+@keyframes meteor-fall {
+  0%   { opacity: 0; transform: rotate(135deg) translateX(0); }
+  4%   { opacity: 1; }
+  22%  { opacity: 1; transform: rotate(135deg) translateX(480px); }
+  27%  { opacity: 0; transform: rotate(135deg) translateX(510px); }
+  100% { opacity: 0; transform: rotate(135deg) translateX(510px); }
+}
+
+@media (max-width: 640px) {
+  .meteor-4, .meteor-5 { display: none; }
+}
   </style>
 </head>
 <body>
 
+<!-- ===== INTRO SCREEN ===== -->
+<div class="intro-screen" id="introScreen">
+  <div class="intro-bg-stars" id="introBgStars"></div>
+  <div class="intro-converge-stars" id="introStars"></div>
+    <svg class="intro-bolt-full" id="introBoltFull" viewBox="0 0 300 700" preserveAspectRatio="none">
+    <path class="bolt-line bolt-main" d="M158,0 L149,58 L172,66 L138,140 L161,148 L112,235 L146,244 L100,335 L140,345 L88,430 L128,440 L78,520 L118,530 L70,610 L105,620 L68,700" />
+
+    <path class="bolt-line bolt-branch" d="M172,66 L215,95 L200,108" />
+    <path class="bolt-line bolt-branch" d="M138,140 L92,168 L108,180" />
+    <path class="bolt-line bolt-branch" d="M161,148 L205,190 L192,205 L210,218" />
+    <path class="bolt-line bolt-branch" d="M112,235 L60,255" />
+    <path class="bolt-line bolt-branch" d="M146,244 L188,275 L175,290" />
+    <path class="bolt-line bolt-branch" d="M100,335 L52,358 L68,372" />
+    <path class="bolt-line bolt-branch" d="M140,345 L182,378" />
+    <path class="bolt-line bolt-branch" d="M88,430 L44,452" />
+    <path class="bolt-line bolt-branch" d="M128,440 L172,468 L158,482" />
+    <path class="bolt-line bolt-branch" d="M78,520 L36,542 L50,558" />
+    <path class="bolt-line bolt-branch" d="M118,530 L160,558" />
+    <path class="bolt-line bolt-branch" d="M70,610 L30,628" />
+    <path class="bolt-line bolt-branch" d="M105,620 L145,645 L132,660" />
+  </svg>
+  <div class="intro-flash" id="introFlash"></div>
+  <div class="intro-title" id="introTitle">
+    <span class="intro-title-line intro-title-white">Welcome To My</span>
+    <span class="intro-title-line intro-title-red">Portofolio Website</span>
+  </div>
+  <div class="intro-loading" id="introLoading">
+    <div class="intro-loading-label">Loading<span id="introPercent">0%</span></div>
+    <div class="intro-bar-track"><div class="intro-bar-fill" id="introBarFill"></div></div>
+  </div>
+</div>
+
+<div class="bg-transition">
+  <div class="bg-layer bg-layer-a"></div>
+  <div class="bg-layer bg-layer-b"></div>
+  <div class="bg-layer bg-layer-c"></div>
+</div>
+
+<div class="meteor meteor-1"></div>
+<div class="meteor meteor-2"></div>
+<div class="meteor meteor-3"></div>
+<div class="meteor meteor-4"></div>
+<div class="meteor meteor-5"></div>
+
+<div class="blackhole blackhole-left"></div>
+<div class="blackhole blackhole-right"></div>
+<div class="planet planet-1"></div>
+<div class="planet planet-2"></div>
+<div class="planet planet-3"></div>
+<div class="planet-ring-wrap"><div class="planet-ring"></div></div>
+<div class="starfield" id="starfield"></div>
+
 <nav class="nav">
   <div class="nav-inner">
     <div class="nav-brand">
-      <i data-lucide="terminal" style="width: 1px; height: 15px;"></i>
+      <i data-lucide="terminal" style="width: 1px; height: 16px;"></i>
       <span>Muhammad Fadhli Wijaya | Portfolio</span>
     </div>
     <button class="nav-toggle" onclick="toggleNav()">
       <i data-lucide="menu" style="width: 22px; height: 22px;"></i>
     </button>
-  </div>
-  <div class="nav-links" id="navLinks">
-    <div class="nav-menu-header">
-      <span class="nav-menu-title">Menu</span>
-      <button class="nav-close" onclick="toggleNav()">
-        <i data-lucide="x" style="width: 18px; height: 18px;"></i>
-      </button>
+    <div class="nav-links" id="navLinks">
+      <div class="nav-menu-header">
+        <span class="nav-menu-title">Menu</span>
+        <button class="nav-close" onclick="toggleNav()">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+      <a href="#home" class="nav-link"><i data-lucide="home" style="width:16px;height:16px;"></i> Home</a>
+      <a href="#about" class="nav-link"><i data-lucide="user" style="width:16px;height:16px;"></i> About</a>
+      <a href="#skills" class="nav-link"><i data-lucide="cpu" style="width:16px;height:16px;"></i> Skills</a>
+      <a href="#projects" class="nav-link"><i data-lucide="folder-kanban" style="width:16px;height:16px;"></i> Projects</a>
+      <a href="#certificates" class="nav-link"><i data-lucide="award" style="width:16px;height:16px;"></i> Certificates</a>
+      <a href="#contact" class="nav-link"><i data-lucide="mail" style="width:16px;height:16px;"></i> Contact</a>
     </div>
-    <a href="#home" class="nav-link"><i data-lucide="home" style="width:16px;height:16px;"></i> Home</a>
-    <a href="#about" class="nav-link"><i data-lucide="user" style="width:16px;height:16px;"></i> About</a>
-    <a href="#skills" class="nav-link"><i data-lucide="cpu" style="width:16px;height:16px;"></i> Skills</a>
-    <a href="#projects" class="nav-link"><i data-lucide="folder-kanban" style="width:16px;height:16px;"></i> Projects</a>
-    <a href="#contact" class="nav-link"><i data-lucide="mail" style="width:16px;height:16px;"></i> Contact</a>
   </div>
 </nav>
 
@@ -701,7 +1494,7 @@
   <!-- PROJECTS -->
 <section id="projects" class="section">
   <div class="section-label">
-    <span class="section-n">04</span>
+    <span class="section-n">03</span>
     <span class="section-rule"></span>
     <span class="section-text">projects</span>
   </div>
@@ -746,6 +1539,40 @@
     </div>
   </div>
 </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates" class="section">
+    <div class="section-label">
+      <span class="section-n">04</span>
+      <span class="section-rule"></span>
+      <span class="section-text">certificates</span>
+    </div>
+
+    <!-- FILTER -->
+    <div class="cert-filters">
+      <button class="cert-filter-btn active" data-filter="all" onclick="filterCert('all', this)">Semua</button>
+      <button class="cert-filter-btn" data-filter="internship" onclick="filterCert('internship', this)">Internship</button>
+      <button class="cert-filter-btn" data-filter="sertifikat" onclick="filterCert('sertifikat', this)">Sertifikat</button>
+      <button class="cert-filter-btn" data-filter="sertifikasi" onclick="filterCert('sertifikasi', this)">Sertifikasi</button>
+      <button class="cert-filter-btn" data-filter="awards" onclick="filterCert('awards', this)">Awards</button>
+    </div>
+
+    <!-- GRID + PAGER: diisi otomatis oleh JS, 6 sertifikat per halaman (2x3) -->
+        <div class="cert-pager">
+      <button class="cert-pager-btn" id="certPrevBtn" onclick="changeCertPage(-1)">
+        <i data-lucide="chevron-left" style="width:16px;height:16px;"></i>
+      </button>
+      <div class="cert-grid-viewport">
+        <div class="cert-grid" id="certGrid"></div>
+      </div>
+      <button class="cert-pager-btn" id="certNextBtn" onclick="changeCertPage(1)">
+        <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+      </button>
+    </div>
+    <div class="cert-page-dots" id="certPageDots"></div>
+
+    <div class="cert-empty" id="certEmpty">Belum ada sertifikat pada kategori ini.</div>
+  </section>
 
   <!-- CONTACT -->
   <section id="contact" class="section contact-term">
@@ -804,9 +1631,130 @@
     Muhammad Fadhli Wijaya — Central Jakarta.
   </footer>
 
-  <!-- SCRIPT UNTUK EFEK KETIK TERMINAL & CAROUSEL -->
+  <!-- SCRIPT UNTUK EFEK KETIK TERMINAL, CAROUSEL & FILTER SERTIFIKAT -->
   <script>
-    lucide.createIcons();
+        lucide.createIcons();
+
+    // ===== INTRO SCREEN SEQUENCE (total 4 detik) =====
+    (function runIntro() {
+      const screen = document.getElementById('introScreen');
+      if (!screen) return;
+
+      const bgStarsWrap = document.getElementById('introBgStars');
+      const starsWrap   = document.getElementById('introStars');
+      const boltSvg     = document.getElementById('introBoltFull');
+      const flash       = document.getElementById('introFlash');
+      const title       = document.getElementById('introTitle');
+      const loading     = document.getElementById('introLoading');
+      const barFill     = document.getElementById('introBarFill');
+      const percentEl   = document.getElementById('introPercent');
+
+      document.body.style.overflow = 'hidden';
+
+      // Bintang latar tersebar, berkelip lembut sepanjang intro
+      const bgCount = window.innerWidth < 768 ? 50 : 90;
+      const bgPalette = ['#ffffff', '#ffe9d8', '#ffcdb8', '#fff3e6'];
+      for (let i = 0; i < bgCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'intro-bg-star';
+        const size = (Math.random() * 2 + 1).toFixed(1);
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.top = (Math.random() * 100).toFixed(2) + '%';
+        star.style.left = (Math.random() * 100).toFixed(2) + '%';
+        star.style.background = bgPalette[Math.floor(Math.random() * bgPalette.length)];
+        star.style.setProperty('--maxop', (Math.random() * 0.5 + 0.4).toFixed(2));
+        star.style.animationDuration = (Math.random() * 2 + 1.6).toFixed(1) + 's';
+        star.style.animationDelay = (Math.random() * 0.6).toFixed(2) + 's';
+        bgStarsWrap.appendChild(star);
+      }
+
+      // Bintang depan yang nanti "mengumpul" ke tengah
+      const convergeStars = [];
+      const convergeCount = window.innerWidth < 768 ? 26 : 42;
+      for (let i = 0; i < convergeCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'intro-star';
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 90 + Math.random() * (window.innerWidth < 768 ? 130 : 220);
+        const sx = Math.cos(angle) * dist;
+        const sy = Math.sin(angle) * dist;
+        star.style.setProperty('--sx', sx.toFixed(1) + 'px');
+        star.style.setProperty('--sy', sy.toFixed(1) + 'px');
+        starsWrap.appendChild(star);
+        convergeStars.push(star);
+      }
+
+      // t=50ms: bintang depan muncul tersebar, satu-satu (stagger halus)
+      setTimeout(() => {
+        convergeStars.forEach((s, i) => {
+          setTimeout(() => s.classList.add('intro-star-show'), i * 8);
+        });
+      }, 50);
+
+      // t=200ms: petir menyambar + kilat flash
+      setTimeout(() => {
+        boltSvg.classList.add('intro-bolt-run');
+        flash.classList.add('intro-flash-run');
+      }, 200);
+
+      // t=900ms: bintang-bintang mengumpul ke tengah lalu menghilang
+      setTimeout(() => {
+        convergeStars.forEach(s => s.classList.add('intro-star-converge'));
+      }, 900);
+
+      // t=1750ms: judul muncul ("Welcome To My" lalu "Portofolio Website")
+      setTimeout(() => {
+        const lines = title.querySelectorAll('.intro-title-line');
+        lines.forEach((line, i) => {
+          setTimeout(() => line.classList.add('intro-title-show'), i * 200);
+        });
+      }, 1750);
+
+      // t=2100ms: loading bar muncul & mengisi sampai 100% pas t~3900ms
+      setTimeout(() => {
+        loading.classList.add('intro-loading-show');
+        const duration = 1800;
+        const start = performance.now();
+        function tick(now) {
+          const pct = Math.min(100, ((now - start) / duration) * 100);
+          barFill.style.width = pct + '%';
+          percentEl.textContent = Math.round(pct) + '%';
+          if (pct < 100) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }, 2100);
+
+      // t=4000ms: intro selesai (total 4 detik), masuk ke web utama
+      setTimeout(() => {
+        screen.classList.add('intro-hide');
+        document.body.style.overflow = '';
+        setTimeout(() => { screen.style.display = 'none'; }, 700);
+      }, 4000);
+    })();
+
+    // ===== STARFIELD: bintang kecil berkedip tersebar di seluruh halaman =====
+    (function generateStarfield() {
+      const field = document.getElementById('starfield');
+      if (!field) return;
+      const count = window.innerWidth < 768 ? 70 : 150;
+      const palette = ['#ffffff', '#ffdcc8', '#ffb199', '#fff3e6'];
+
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'sky-star';
+        const size = (Math.random() * 2 + 1).toFixed(1);
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.top = (Math.random() * 100).toFixed(2) + 'vh';
+        star.style.left = (Math.random() * 100).toFixed(2) + 'vw';
+        star.style.background = palette[Math.floor(Math.random() * palette.length)];
+        star.style.animationDuration = (Math.random() * 3 + 2).toFixed(1) + 's';
+        star.style.animationDelay = (Math.random() * 4).toFixed(1) + 's';
+        field.appendChild(star);
+      }
+    })();
+
      function toggleNav() {
       const navLinks = document.getElementById('navLinks');
       navLinks.classList.toggle('open');
@@ -852,7 +1800,7 @@
       container.appendChild(cursor);
     }
 
-    startTypewriter();
+        setTimeout(startTypewriter, 4100);
 
     // ===== CAROUSEL LOGIC =====
     function initCarouselDots(id) {
@@ -885,6 +1833,330 @@
     }
 
     initCarouselDots('carousel-1');
+
+    // ===== DAFTAR SERTIFIKAT =====
+    // Tinggal tambah 1 blok { ... } untuk tiap sertifikat baru, lalu koma.
+    // category HARUS salah satu dari: "internship", "sertifikat", "sertifikasi", "awards"
+    // image: taruh file fotonya di folder public/assets/certificates/, lalu isi path-nya di sini.
+    //        Kalau belum ada fotonya, kosongkan jadi "" (nanti tampil ikon placeholder).
+    const CERTIFICATES = [
+      {
+        title: "Gemini Certified Educator",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Gemini Certified Educator.jpg"
+      },
+      {
+        title: "Gemini Certified Faculty",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Gemini Certified Faculty.jpg"
+      },
+      {
+        title: "Gemini Certified Students",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Gemini Certified Students.jpg"
+      },
+      {
+        title: "Google of Completion",
+        category: "Sertifikat",
+        image: "public/assets/CERTIFICATE - Google of Completion.jpg"
+      },
+      {
+        title: "Data Science & Gen AI with Microsoft Azure",
+        category: "Sertifikasi",
+        image: "public/assets/microsoft-data-science-genai.jpeg"
+      },
+      {
+        title: "SAP Analytics Cloud Training",
+        category: "Sertifikat",
+        image: "public/assets/CERTIFICATE - ASEAN Data Science.jpg"
+      },
+      {
+        title: "Data Scientist Supervisor",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Data Scientist Supervisor  Nasional.jpg"
+      },
+      {
+        title: "Introduction to Data Science",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE -Data Sience1.jpg"
+      },
+      {
+        title: "Computer and Mobile Devices",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Computer Device.jpg"
+      },
+      {
+        title: "Operating Systems Support",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - IT Support.jpg"
+      },
+      {
+        title: "AI Fundamentals",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Dasar AI.jpg"
+      },
+      {
+        title: "Cyber Security Fundamentals",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Dasar Cyber Security.jpg"
+      },
+      {
+        title: "Data Science Fundamentals",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Data Science.jpg"
+      },
+      {
+        title: "DevOps Fundamentals",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - DevOps.jpg"
+      },
+      {
+        title: "AWS Cloud Practitioner",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Dicoding AWS.jpg"
+      },
+      {
+        title: "Introduction to Web Development",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Dicoding Development.jpg"
+      },
+      {
+        title: "Financial Literacy",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Financial Literacy.jpg"
+      },
+      {
+        title: "Cloud & Gen AI Fundamentals on AWS",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Cloud & Gen AI AWS.jpg"
+      },
+      {
+        title: "Building Gen AI Apps with Azure",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Membangun Aplikasi Gen AI.jpg"
+      },
+      {
+        title: "Pemrograman Python",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Pemograman Python.jpg"
+      },
+      {
+        title: "Applied Data Science with Microsoft Fabric",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Penerapan Data Science.jpg"
+      },
+      {
+        title: "Programming for Software Developers",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Pengembangan Software.jpg"
+      },
+      {
+        title: "Prompt Engineering for Software Developers",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - Prompt Software Developer.jpg"
+      },
+      {
+        title: "Structured Query Language (SQL) Fundamentals",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - SQL.jpg"
+      },
+      {
+        title: "Microsoft Office Specialist (MOS)",
+        category: "Sertifikasi",
+        image: "public/assets/SD.png"
+      },
+      {
+        title: "Digital Skill Fair (DSF)",
+        category: "Sertifikat",
+        image: "public/assets/CERTIFICATE - Dibimbing.jpg"
+      },
+      {
+        title: "AI Fluency Training",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - IOE Microsoft.png"
+      },
+      {
+        title: "Kompetensi Nasional Indonesia",
+        category: "Awards",
+        image: "public/assets/CERTIFICATE - KNI.jpg"
+      },
+      {
+        title: "National Academic Student Competition",
+        category: "Awards",
+        image: "public/assets/PIAGAM - NASCO.jpg"
+      },
+      {
+        title: "Indonesia Youth Science & Health Olympiad",
+        category: "Awards",
+        image: "public/assets/CERTIFICATE - IYSHO.jpg"
+      },
+      {
+        title: "Certified Database Programmer (CDBPro)",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - BNSP Database Programmer.jpeg"
+      },
+      {
+        title: "Python Programming",
+        category: "Sertifikat",
+        image: "public/assets/CERTIFICATE - Python.jpg"
+      },
+      {
+        title: "Basic Cybersecurity",
+        category: "Sertifikasi",
+        image: "public/assets/CERTIFICATE - CodePolitan Cyber.jpg"
+      },
+      {
+        title: "Fundamentals & Practical Use of Generative AI",
+        category: "Sertifikasi",
+        image: "public/assets/codepolitan.jpg"
+      },
+      {
+        title: "Tracking Banpem Website Recognition",
+        category: "Awards",
+        image: "public/assets/1.jpeg"
+      },
+      {
+        title: "Yarsi University - Student Achievement Feature",
+        category: "Awards",
+        image: "public/assets/2.jpeg"
+      },
+      {
+        title: "Kementerian Pertanian RI",
+        category: "Internship",
+        image: "public/assets/intern1.jpeg"
+      },
+      {
+        title: "Balai Kota DKI Jakarta",
+        category: "Internship",
+        image: "public/assets/intern2.jpeg"
+      },
+      // Contoh nambah sertifikat baru dengan foto:
+      // {
+      //   title: "Sertifikat Pelatihan Web Development",
+      //   issuer: "Dicoding Indonesia",
+      //   date: "2025",
+      //   category: "sertifikat",
+      //   image: "public/assets/certificates/dicoding-webdev.jpg"
+      // },
+    ];
+
+    const CERT_BADGE_LABEL = {
+      internship: "Internship",
+      sertifikat: "Sertifikat",
+      sertifikasi: "Sertifikasi",
+      awards: "Awards"
+    };
+
+    const CERT_PLACEHOLDER_ICON = {
+      internship: "briefcase",
+      sertifikat: "file-badge",
+      sertifikasi: "shield-check",
+      awards: "trophy"
+    };
+
+    const CERTS_PER_PAGE = 6; // 2 baris x 3 kolom
+    const certState = { filter: 'all', page: 0 };
+
+    function getFilteredCertificates() {
+      return CERTIFICATES.filter(cert => {
+        const catKey = (cert.category || '').toLowerCase();
+        return certState.filter === 'all' || catKey === certState.filter;
+      });
+    }
+
+    function renderCertificates() {
+      const grid = document.getElementById('certGrid');
+      if (!grid) return;
+
+      const filtered = getFilteredCertificates();
+      const totalPages = Math.max(1, Math.ceil(filtered.length / CERTS_PER_PAGE));
+      if (certState.page >= totalPages) certState.page = totalPages - 1;
+      if (certState.page < 0) certState.page = 0;
+
+      const start = certState.page * CERTS_PER_PAGE;
+      const pageItems = filtered.slice(start, start + CERTS_PER_PAGE);
+
+      grid.innerHTML = pageItems.map(cert => {
+        const catKey = (cert.category || '').toLowerCase();
+        const imgHtml = cert.image
+          ? `<img src="${cert.image}" alt="${cert.title}">`
+          : `<i data-lucide="${CERT_PLACEHOLDER_ICON[catKey] || 'file-badge'}" style="width:32px;height:32px;"></i>`;
+
+        return `
+          <div class="cert-card" data-category="${catKey}">
+            <div class="cert-card-img">${imgHtml}</div>
+            <div class="cert-card-body">
+              <span class="cert-card-badge">${CERT_BADGE_LABEL[catKey] || cert.category}</span>
+              <div class="cert-card-title">${cert.title}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+
+      document.getElementById('certEmpty').style.display = filtered.length === 0 ? 'block' : 'none';
+
+      const prevBtn = document.getElementById('certPrevBtn');
+      const nextBtn = document.getElementById('certNextBtn');
+      if (prevBtn) prevBtn.disabled = certState.page <= 0;
+      if (nextBtn) nextBtn.disabled = certState.page >= totalPages - 1;
+
+      const dotsWrap = document.getElementById('certPageDots');
+      if (dotsWrap) {
+        dotsWrap.innerHTML = '';
+        if (totalPages > 1) {
+          for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'cert-page-dot' + (i === certState.page ? ' active' : '');
+            dot.onclick = () => {
+              const dir = i > certState.page ? 1 : -1;
+              if (i === certState.page) return;
+              slideCertPage(dir, () => { certState.page = i; });
+            };
+            dotsWrap.appendChild(dot);
+          }
+        }
+      }
+    }
+
+        function changeCertPage(direction) {
+          slideCertPage(direction, () => { certState.page += direction; });
+        }
+
+        function slideCertPage(direction, updatePageFn) {
+         const grid = document.getElementById('certGrid');
+         if (!grid) { updatePageFn(); renderCertificates(); return; }
+
+         const outClass = direction > 0 ? 'cert-slide-out-left' : 'cert-slide-out-right';
+         const inClass  = direction > 0 ? 'cert-slide-in-right' : 'cert-slide-in-left';
+
+         grid.classList.remove('cert-slide-in-left', 'cert-slide-in-right');
+         grid.classList.add(outClass);
+
+         setTimeout(() => {
+            grid.classList.remove(outClass);
+            updatePageFn();
+           renderCertificates();
+           grid.classList.add(inClass);
+
+           grid.addEventListener('animationend', function handler() {
+             grid.classList.remove(inClass);
+             grid.removeEventListener('animationend', handler);
+           });
+          }, 280);
+       }
+
+    renderCertificates();
+
+    // ===== FILTER SERTIFIKAT =====
+    function filterCert(category, btnEl) {
+      document.querySelectorAll('.cert-filter-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      certState.filter = category.toLowerCase();
+      certState.page = 0;
+      renderCertificates();
+    }
 
     // ===== HAPUS HASH (#section) DARI URL SAAT KLIK NAV =====
     document.querySelectorAll('a[href^="#"]').forEach(link => {
